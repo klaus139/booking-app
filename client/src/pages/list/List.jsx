@@ -1,11 +1,13 @@
 import React, {useState} from "react";
 import { useLocation } from "react-router-dom";
 import { format } from "date-fns";
+import { DateRange } from "react-date-range";
 
 import "./list.css";
 import Header from "../../components/header/Header";
 import Navbar from "../../components/navbar/Navbar";
-import { DateRange } from "react-date-range";
+import SearchItem from "../../components/searchItem/SearchItem";
+
 
 const List = () => {
   const location = useLocation();
@@ -41,6 +43,7 @@ const List = () => {
             </div>
             <div className="lsItem">
               <label>Options</label>
+              <div className='lsOptions'>
               <div className='lsOptionItem'>
                 <span className="lsOptionText">Min price <small>per night</small></span>
                 <input className='lsOptionInput' type='number' />
@@ -51,19 +54,32 @@ const List = () => {
               </div>
               <div className='lsOptionItem'>
                 <span className="lsOptionText">Adult </span>
-                <input className='lsOptionInput' type='number' placeholder={options.adult}/>
+                <input className='lsOptionInput' type='number' min={1} placeholder={options.adult}/>
               </div>
               <div className='lsOptionItem'>
                 <span className="lsOptionText">Children</span>
-                <input className='lsOptionInput' type='number' placeholder={options.children}/>
+                <input className='lsOptionInput' type='number' min={0} placeholder={options.children}/>
               </div>
               <div className='lsOptionItem'>
                 <span className="lsOptionText">Room</span>
-                <input className='lsOptionInput' type='number' placeholder={options.room}/>
+                <input className='lsOptionInput' type='number' min={1} placeholder={options.room}/>
               </div>
             </div>
+            </div>
+            <button>Search</button>
           </div>
-          <div className="listResult"></div>
+          <div className="listResult">
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+          </div>
         </div>
       </div>
     </div>
