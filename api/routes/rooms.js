@@ -8,15 +8,15 @@ import { createRoom, deleteRoom, getRoom, getRooms, updateRoom } from '../contro
 const router = express.Router();
 
 //create
-router.post('/', verifyAdmin, createRoom)
+router.post('/:hotelid', verifyAdmin, createRoom)
 //update
 router.put('/:id', verifyAdmin, updateRoom);
 //delete
-router.delete('/:id', verifyAdmin, deleteRoom);
+router.delete('/:id/:hotelid', verifyAdmin, deleteRoom);
 //get
 router.get('/:id', getRoom);
 //getall
-router.get('/', getRooms);
+router.get('/:id', getRooms);
 
 
 export default router;
