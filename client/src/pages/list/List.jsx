@@ -7,6 +7,8 @@ import "./list.css";
 import Header from "../../components/header/Header";
 import Navbar from "../../components/navbar/Navbar";
 import SearchItem from "../../components/searchItem/SearchItem";
+import useFetch from "../../hooks/useFetch";
+import LoadingSpinner from "../../components/spinner/Spinner";
 
 
 const List = () => {
@@ -15,8 +17,14 @@ const List = () => {
   const [date, setDate] = useState(location.state.date);
   const [options, setOptions] = useState(location.state.options);
   const [openDate , setOpenDate] = useState(false);
+  const [min, setMin] = useState("");
+  const [max, setMax] = useState("");
+  const {data, loading, error, reFetch} = useFetch(`/hotels?city=${destination}&min=${min}&max=${max}`);
 
+  const handleClick = () => {
+    reFetch()
 
+  }
   return (
     <div>
       <Navbar />
@@ -46,11 +54,11 @@ const List = () => {
               <div className='lsOptions'>
               <div className='lsOptionItem'>
                 <span className="lsOptionText">Min price <small>per night</small></span>
-                <input className='lsOptionInput' type='number' />
+                <input className='lsOptionInput' type='number' onChange={e=>setMin(e.target.value)} />
               </div>
               <div className='lsOptionItem'>
                 <span className="lsOptionText">Max price <small>per night</small></span>
-                <input className='lsOptionInput' type='number' />
+                <input className='lsOptionInput' type='number' onChange={e=>setMax(e.target.value)}/>
               </div>
               <div className='lsOptionItem'>
                 <span className="lsOptionText">Adult </span>
@@ -66,19 +74,15 @@ const List = () => {
               </div>
             </div>
             </div>
-            <button>Search</button>
+            <button onClick={handleClick}>Search</button>
           </div>
           <div className="listResult">
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
+            {loading ? <LoadingSpinner /> : <>
+            {data.map(item=> (
+              <SearchItem key={item._id} item={item} />
+            ))}
+            </> }
+            
           </div>
         </div>
       </div>
