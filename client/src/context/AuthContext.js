@@ -2,12 +2,12 @@ import { createContext, useEffect, useReducer } from "react";
 //import Cookies from 'js-cookie';
 
 const INITIAL_STATE = {
-    user: JSON.parse(localStorage.getItem("")) || null,
+    user: JSON.stringify(localStorage.getItem("user")) || null,
     loading: false,
     error: null,
     
 };
-
+console.log(INITIAL_STATE)
 
 
 export const AuthContext = createContext(INITIAL_STATE);

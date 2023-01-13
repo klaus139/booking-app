@@ -16,6 +16,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
 import Reserve from "../../components/reserve/Reserve";
+import LoadingSpinner from "../../components/spinner/Spinner";
 
 const Hotel = () => {
   const location = useLocation();
@@ -57,18 +58,15 @@ const Hotel = () => {
   };
 
   const handleClick = () => {
-    if (user === undefined) {
-      setOpenModal(true);
-    } else {
-      navigate("/login");
-    }
+    
+      setOpenModal(true); 
   };
   return (
     <div>
       <Navbar />
       <Header type="list" />
       {loading ? (
-        "loading"
+        <LoadingSpinner />
       ) : (
         <div className="hotelContainer">
           {open && (
